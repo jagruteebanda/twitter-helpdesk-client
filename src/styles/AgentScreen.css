@@ -18,29 +18,6 @@
   padding-top: 15px;
 }
 
-/* ================== TOP BAR CSS =============== */
-.top-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  height: 10vh;
-  font-size: 0.9rem;
-  color: #929292;
-}
-
-.updates {
-  border-bottom: 1px solid #ececec;
-}
-
-.session {
-  padding-right: 50px;
-}
-
-/* ================== TOP BAR CSS - END =============== */
-
-
-
 .main-body {
   display: flex;
   flex-direction: row;

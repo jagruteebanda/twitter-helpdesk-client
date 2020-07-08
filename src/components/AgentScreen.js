@@ -1,5 +1,5 @@
 import React from "react";
-import { FaPhoneAlt, FaEnvelope, FaSearch } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import axios from "axios";
 import socketIOClient from "socket.io-client";
 
