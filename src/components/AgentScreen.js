@@ -4,6 +4,7 @@ import axios from "axios";
 import socketIOClient from "socket.io-client";
 
 import SideBar from "../components/SideBar";
+import TopBar from "../components/TopBar";
 import MidBar from "../components/MidBar";
 import conf from "../conf/config";
 
@@ -22,8 +23,6 @@ class AgentScreen extends React.Component {
   }
 
   componentDidMount = () => {
-    let userName = localStorage.getItem("userName");
-    this.setState({ userName });
 
     axios({
       method: "get",
@@ -97,15 +96,7 @@ class AgentScreen extends React.Component {
       <div className="agent-screen">
         <SideBar />
         <div className="main-div">
-          <div className="top-bar">
-            <div>
-              <span className="updates">Updates</span>
-            </div>
-            <div>
-              <span className="session">Session: 34 minutes</span>
-              <span>User: {this.state.userName}</span>
-            </div>
-          </div>
+          <TopBar />
           <MidBar />
           <div className="main-body">
             {this.renderTweetsList()}
