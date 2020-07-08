@@ -1,9 +1,10 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaSearch } from "react-icons/fa";
-import axios from 'axios';
+import axios from "axios";
 import socketIOClient from "socket.io-client";
 
 import SideBar from "../components/SideBar";
+import MidBar from "../components/MidBar";
 import conf from "../conf/config";
 
 import "../styles/AgentScreen.css";
@@ -25,20 +26,22 @@ class AgentScreen extends React.Component {
     this.setState({ userName });
 
     axios({
-      method: 'get',
-      url: 'http://127.0.0.1:3000/apis/tweets/get'
-    }).then(res => {
-      console.log(res);
-      if (res.data.code === 406) {
-        console.log("login error", res.error);
-      } else if (res.data.code === 200) {
-        this.setState({ tweetList: res.data.data });
-      } else {
-        console.log("login error:: ", res.data);
-      }
-    }).catch(err => {
-      console.log('Error in fetching tweets:: ', err);
-    });
+      method: "get",
+      url: "http://127.0.0.1:3000/apis/tweets/get",
+    })
+      .then((res) => {
+        // console.log(res);
+        if (res.data.code === 406) {
+          console.log("login error", res.error);
+        } else if (res.data.code === 200) {
+          this.setState({ tweetList: res.data.data });
+        } else {
+          console.log("login error:: ", res.data);
+        }
+      })
+      .catch((err) => {
+        console.log("Error in fetching tweets:: ", err);
+      });
 
     let { socket, tweetList } = this.state;
     socket.on("tweet", (data) => {
@@ -47,12 +50,25 @@ class AgentScreen extends React.Component {
     });
   };
 
+  handleTweetSelect = (tweet) => {
+    const { tweetList } = this.state;
+    tweetList.forEach((t) => {
+      t.id === tweet.id ? (t["isSelected"] = true) : (t["isSelected"] = false);
+      return t;
+    });
+    this.setState({ tweetList });
+  };
+
   renderTweetsList = () => {
     const { tweetList } = this.state;
     return (
       <div className="tweet-list">
         {tweetList.map((tweet, i) => (
-          <div className="tweet">
+          <div
+            className="tweet"
+            onClick={() => this.handleTweetSelect(tweet)}
+            style={{ backgroundColor: (tweet.isSelected || i === 0) ? "#f7f6f2" : "#fff" }}
+          >
             <div className="tweet-profile-image">
               <img
                 className="tweet-profile-img"
@@ -90,19 +106,7 @@ class AgentScreen extends React.Component {
               <span>User: {this.state.userName}</span>
             </div>
           </div>
-          <div className="mid-bar">
-            <div className="left-content">
-              <span className="conversations">
-                <b>Conversations</b>
-              </span>
-              <div className="quick-search">
-                <FaSearch/>
-                <span>Quick Search</span>
-              </div>
-              <span>Filter</span>
-            </div>
-            <span>Online</span>
-          </div>
+          <MidBar />
           <div className="main-body">
             {this.renderTweetsList()}
             <div className="tweet-body">
