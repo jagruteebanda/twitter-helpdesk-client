@@ -1,0 +1,139 @@
+.agent-screen {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+.main-div {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 100vh;
+  padding-left: 50px;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 5vh;
+}
+
+.mid-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-evenly; */
+  height: 5vh;
+}
+
+.main-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.tweet-list {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.tweet {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.tweet-profile-image {
+  display: flex;
+  width: 15%;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.tweet-profile-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.tweet-text-body {
+  width: 75%;
+}
+
+.tweet-user-name {
+  font-size: 0.9rem;
+  color: #333333;
+}
+
+.tweet-text {
+  font-size: 0.8rem;
+  color: #706f6f;
+}
+
+.tweet-body {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  width: 75%;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.tweet-conversation {
+  width: 70%;
+  border-right: 1px solid #e6e6ee;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #eeeeee;
+  padding: 5px;
+}
+
+.tweet-customer {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.contact-customer {
+  display: flex;
+  flex-direction: row;
+}
+
+.contact-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  background-color: #e6e6e6;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.contact-cell-content {
+  padding-left: 5px;
+}

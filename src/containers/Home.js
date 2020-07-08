@@ -1,18 +1,27 @@
 import React from 'react';
+import socketIOClient from 'socket.io-client';
 
-const io = require('socket.io')();
+import conf from '../conf/config';
+
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    const endpoint = conf.receiver_socket_url;
+    const socket = socketIOClient(endpoint);
     this.state = {
-
+      socket,
+      tweetArray: []
     }
   }
 
+
   componentDidMount = () => {
-    io.on('connection', client => {
-      console.log('connected');
+    let { socket, tweetArray } = this.state;
+    socket.on('tweet', data => {
+      console.log(data.tweet);
+      tweetArray.push(data.tweet);
+      this.setState({ tweetArray });
     });
   }
 
@@ -21,8 +30,15 @@ class Home extends React.Component {
   }
 
   render() {
+    const { tweetArray } = this.state;
     return (
-      <div className="Home">Home</div>
+      <div className="Home">
+        {
+          tweetArray.map((item, i) =>
+            <p key={item.id}>{item.text}</p>
+          )
+        }
+      </div>
     )
   }
 }
