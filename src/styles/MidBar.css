@@ -1,0 +1,34 @@
+/* ================== MID BAR CSS =============== */
+
+.mid-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 5vh;
+} 
+
+.left-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.conversations {
+  font-size: 1.5rem;
+}
+
+.quick-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  margin-left: 20px;
+  font-size: 0.8rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #979797;
+}
+
+/* ================== TOP BAR CSS - END =============== */
