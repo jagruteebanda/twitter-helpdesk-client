@@ -5,29 +5,76 @@
   height: 100vh;
 }
 
+/**
+* MAIN DIV CSS
+*/
 .main-div {
   display: flex;
   flex-direction: column;
   width: 95%;
   height: 100vh;
-  padding-left: 50px;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding-top: 15px;
 }
 
+/* ================== TOP BAR CSS =============== */
 .top-bar {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 5vh;
+  justify-content: space-between;
+  width: 100%;
+  height: 10vh;
+  font-size: 0.9rem;
+  color: #929292;
 }
+
+.updates {
+  border-bottom: 1px solid #ececec;
+}
+
+.session {
+  padding-right: 50px;
+}
+
+/* ================== TOP BAR CSS - END =============== */
+
+
+
+/* ================== MID BAR CSS =============== */
 
 .mid-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-evenly; */
+  justify-content: space-between;
   height: 5vh;
+} 
+
+.left-content {
+  display: flex;
+  flex-direction: row;
 }
+
+.conversations {
+  font-size: 1.5rem;
+}
+
+.quick-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  margin-left: 20px;
+  font-size: 0.8rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #979797;
+}
+
+/* ================== TOP BAR CSS - END =============== */
 
 .main-body {
   display: flex;
@@ -81,7 +128,7 @@
   flex-direction: row;
   border: 1px solid #e6e6e6;
   border-radius: 5px;
-  width: 75%;
+  width: 85%;
   margin-top: 10px;
   margin-left: 20px;
 }
