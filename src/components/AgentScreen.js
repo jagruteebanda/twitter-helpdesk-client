@@ -62,39 +62,6 @@ class AgentScreen extends React.Component {
     this.setState({ tweetList });
   };
 
-  renderTweetsList = () => {
-    const { tweetList } = this.state;
-    return (
-      <div className="tweet-list">
-        {tweetList.map((tweet, i) => (
-          <div
-            className="tweet"
-            onClick={() => this.handleTweetSelect(tweet)}
-            style={{ backgroundColor: (tweet.isSelected) ? "#f7f6f2" : "#fff" }}
-          >
-            <div className="tweet-profile-image">
-              <img
-                className="tweet-profile-img"
-                src={tweet.user.profile_image_url}
-                width="30"
-                height="30"
-                alt="profile-img"
-              />
-            </div>
-            <div className="tweet-text-body">
-              <div>
-                <span className="tweet-user-name">{tweet.user.name}</span>
-              </div>
-              <div>
-                <span className="tweet-text">{tweet.text}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   render() {
     return (
       <div className="agent-screen">
@@ -103,7 +70,6 @@ class AgentScreen extends React.Component {
           <TopBar />
           <MidBar />
           <div className="main-body">
-            {/* {this.renderTweetsList()} */}
             <TweetList tweetList={this.state.tweetList} handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)} />
             <div className="tweet-body">
               <div className="tweet-conversation">
