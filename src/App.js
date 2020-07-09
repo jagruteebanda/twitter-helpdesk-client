@@ -1,25 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-import Home from '../src/containers/Home';
+// import Home from '../src/containers/Home';
 import LoginAndRegister from './components/LoginRegister';
 import AgentScreen from './components/AgentScreen';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/login">
-          <LoginAndRegister />
-        </Route>
-        <Route exact path="/home">
-          <AgentScreen />
-        </Route>
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route exact path="/" component={LoginAndRegister} />
+        <Route exact path="/home" component={AgentScreen} />
+        <Redirect to="/" />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 
