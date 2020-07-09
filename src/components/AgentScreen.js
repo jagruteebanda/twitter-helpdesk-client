@@ -6,6 +6,7 @@ import socketIOClient from "socket.io-client";
 import SideBar from "../components/SideBar";
 import TopBar from "../components/TopBar";
 import MidBar from "../components/MidBar";
+import TweetList from "../components/TweetList";
 import conf from "../conf/config";
 
 import "../styles/AgentScreen.css";
@@ -19,7 +20,9 @@ class AgentScreen extends React.Component {
       tweetList: [],
       userName: "",
       socket,
+      selectedTweet: {}
     };
+    // this.handleTweetSelect = this.handleTweetSelect.bind(this);
   }
 
   componentDidMount = () => {
@@ -33,6 +36,7 @@ class AgentScreen extends React.Component {
         if (res.data.code === 406) {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
+          res.data.data[0]['isSelected'] = true;
           this.setState({ tweetList: res.data.data });
         } else {
           console.log("login error:: ", res.data);
@@ -49,9 +53,9 @@ class AgentScreen extends React.Component {
     });
   };
 
-  handleTweetSelect = (tweet) => {
-    const { tweetList } = this.state;
-    tweetList.forEach((t) => {
+  handleTweetSelect(tweet) {
+    let { tweetList } = this.state;
+    tweetList = tweetList.map((t) => {
       t.id === tweet.id ? (t["isSelected"] = true) : (t["isSelected"] = false);
       return t;
     });
@@ -66,7 +70,7 @@ class AgentScreen extends React.Component {
           <div
             className="tweet"
             onClick={() => this.handleTweetSelect(tweet)}
-            style={{ backgroundColor: (tweet.isSelected || i === 0) ? "#f7f6f2" : "#fff" }}
+            style={{ backgroundColor: (tweet.isSelected) ? "#f7f6f2" : "#fff" }}
           >
             <div className="tweet-profile-image">
               <img
@@ -99,7 +103,8 @@ class AgentScreen extends React.Component {
           <TopBar />
           <MidBar />
           <div className="main-body">
-            {this.renderTweetsList()}
+            {/* {this.renderTweetsList()} */}
+            <TweetList tweetList={this.state.tweetList} handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)} />
             <div className="tweet-body">
               <div className="tweet-conversation">
                 <div className="user-data">
