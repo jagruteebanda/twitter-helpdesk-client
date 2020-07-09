@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/TweetList.css';
 
 const TweetList = ({ tweetList, handleTweetSelect = f => f }) => {
   return (

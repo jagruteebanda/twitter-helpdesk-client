@@ -1,6 +1,6 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
-import '../styles/MidBar.css';
+import { FaSearch, FaSlidersH } from "react-icons/fa";
+import "../styles/MidBar.css";
 
 const MidBar = () => {
   return (
@@ -11,11 +11,16 @@ const MidBar = () => {
         </span>
         <div className="quick-search">
           <FaSearch />
-          <span>Quick Search</span>
+          <input className="quick-search-input" placeholder={"Quick Search"} />
         </div>
-        <span>Filter</span>
+        <div className="filter">
+          <FaSlidersH className="filter-icon" />
+          <span className="filter-text">Filter</span>
+        </div>
       </div>
-      <span>Online</span>
+      <div className="online">
+        <span className="online-text">Online</span>
+      </div>
     </div>
   );
 };
