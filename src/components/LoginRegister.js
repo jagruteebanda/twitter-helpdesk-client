@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+
 import "../styles/LoginAndRegister.css";
 
 class LoginAndRegister extends React.Component {
@@ -62,6 +63,7 @@ class LoginAndRegister extends React.Component {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
           localStorage.setItem("userName", registerDetails.username);
+          this.props.history.push("/home");
         } else {
           console.log("login error:: ", res.data);
         }
@@ -139,8 +141,13 @@ class LoginAndRegister extends React.Component {
                 className="input-field"
                 value={registerDetails.username}
                 placeholder={"Username"}
-                onChange={() =>
-                  this.setState({ registerDetails: registerDetails.username })
+                onChange={(e) =>
+                  this.setState({
+                    registerDetails: {
+                      ...registerDetails,
+                      username: e.target.value,
+                    },
+                  })
                 }
               />
             </div>
@@ -150,8 +157,13 @@ class LoginAndRegister extends React.Component {
                 value={registerDetails.password}
                 placeholder={"Password"}
                 password="true"
-                onChange={() =>
-                  this.setState({ registerDetails: registerDetails.password })
+                onChange={(e) =>
+                  this.setState({
+                    registerDetails: {
+                      ...registerDetails,
+                      password: e.target.value,
+                    },
+                  })
                 }
               />
             </div>

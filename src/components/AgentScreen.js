@@ -22,6 +22,7 @@ class AgentScreen extends React.Component {
       socket,
       selectedTweet: {},
       conversationList: [],
+      message: "",
     };
     // this.handleTweetSelect = this.handleTweetSelect.bind(this);
   }
@@ -64,15 +65,14 @@ class AgentScreen extends React.Component {
         console.log("Error in fetching tweets:: ", err);
       });
 
-    const options = {
+    axios({
       method: "GET",
       url: "http://localhost:3000/apis/message/list",
       headers: {
         accept: "application/json",
         "content-type": "application/json",
       },
-    };
-    axios(options)
+    })
       .then((res) => {
         // console.log(res);
         this.setState({ conversationList: res.data.data.events });
@@ -91,8 +91,45 @@ class AgentScreen extends React.Component {
     this.setState({ tweetList, selectedTweet: tweet });
   }
 
+  handleMessageChange(message) {
+    this.setState({
+      message,
+    });
+  }
+
+  sendMessage(user, message) {
+    // console.log(user, message);
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/apis/message/send",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      data: {
+        type: "message_create",
+        message_create: {
+          target: {
+            recipient_id: user.id_str,
+          },
+          message_data: {
+            text: message,
+          },
+        },
+      },
+    })
+      .then((res) => {
+        let { conversationList } = this.state;
+        conversationList.unshift(res.data.data.event); 
+        this.setState({ conversationList });
+      })
+      .catch((err) => {
+        console.log("Error in fetching conversation:: ", err);
+      });
+  }
+
   render() {
-    const { tweetList, selectedTweet, conversationList } = this.state;
+    const { tweetList, selectedTweet, conversationList, message } = this.state;
     let userConversation = conversationList
       .filter(
         (c) =>
@@ -112,8 +149,13 @@ class AgentScreen extends React.Component {
               handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)}
             />
             <TweetBody
+              message={message}
               selectedTweet={selectedTweet}
               conversationList={userConversation}
+              handleMessageChange={(message) =>
+                this.handleMessageChange(message)
+              }
+              sendMessage={(user, message) => this.sendMessage(user, message)}
             />
           </div>
         </div>

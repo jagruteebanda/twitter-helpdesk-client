@@ -1,11 +1,21 @@
 import React from "react";
 import { IconContext } from "react-icons";
-import { FaPhoneAlt, FaEnvelope, FaPaperclip } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaPaperclip,
+  FaRegPaperPlane,
+} from "react-icons/fa";
 
 import "../styles/TweetBody.css";
 
-const TweetBody = (props) => {
-  const { selectedTweet, conversationList } = props;
+const TweetBody = ({
+  selectedTweet,
+  conversationList,
+  message,
+  handleMessageChange = (f) => f,
+  sendMessage = (f) => f,
+}) => {
   if (selectedTweet)
     return (
       <div className="tweet-body">
@@ -83,10 +93,17 @@ const TweetBody = (props) => {
             <div className="reply-input-group">
               <input
                 className="reply-input"
-                // value={""}
+                value={message}
+                onChange={(e) => handleMessageChange(e.target.value)}
                 placeholder={"Reply..."}
               />
-              <FaPaperclip />
+              {message.length > 0 ? (
+                <div onClick={(e) => sendMessage(selectedTweet.user, message)}>
+                  <FaRegPaperPlane />
+                </div>
+              ) : (
+                <FaPaperclip />
+              )}
             </div>
           </div>
         </div>
@@ -102,7 +119,9 @@ const TweetBody = (props) => {
             }
             alt="user-profile-img"
           />
-          <span className="customer-name">{selectedTweet.user && selectedTweet.user.name}</span>
+          <span className="customer-name">
+            {selectedTweet.user && selectedTweet.user.name}
+          </span>
           <span className="online-txt">{"Online"}</span>
           <div className="contact-customer">
             <div className="contact-cell">
