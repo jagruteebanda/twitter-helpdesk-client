@@ -3,6 +3,8 @@
   flex-direction: column;
   width: 20%;
   margin-top: 10px;
+  height: 80vh;
+  overflow-y:auto;
 }
 
 .tweet {
@@ -12,6 +14,7 @@
   border-radius: 5px;
   padding: 8px;
   margin-top: 10px;
+  min-height: fit-content;
 }
 
 .tweet-profile-image {

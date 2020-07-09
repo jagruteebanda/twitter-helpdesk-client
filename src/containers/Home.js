@@ -1,26 +1,26 @@
 import React from "react";
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 
-import conf from "../conf/config";
+// import conf from "../conf/config";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    const endpoint = conf.receiver_socket_url;
-    const socket = socketIOClient(endpoint);
+    // const endpoint = conf.receiver_socket_url;
+    // const socket = socketIOClient(endpoint);
     this.state = {
-      socket,
+      // socket,
       tweetArray: [],
     };
   }
 
   componentDidMount = () => {
-    let { socket, tweetArray } = this.state;
-    socket.on("tweet", (data) => {
-      console.log(data.tweet);
-      tweetArray.push(data.tweet);
-      this.setState({ tweetArray });
-    });
+    // let { socket, tweetArray } = this.state;
+    // socket.on("tweet", (data) => {
+    //   console.log(data.tweet);
+    //   tweetArray.push(data.tweet);
+    //   this.setState({ tweetArray });
+    // });
   };
 
   componentWillUnmount = () => {};

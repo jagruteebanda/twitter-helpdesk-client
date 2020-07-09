@@ -34,6 +34,7 @@ class LoginAndRegister extends React.Component {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
           localStorage.setItem("userName", loginDetails.username);
+          localStorage.setItem("userId", "1280422772561244160");
           window.location = "http://localhost:3000/twitter/login";
         } else {
           console.log("login error:: ", res.data);

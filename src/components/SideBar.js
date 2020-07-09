@@ -32,8 +32,9 @@ const SideBar = (props) => {
       />
       {/* </div> */}
       <div className="icons-list">
-        {iconsList.map((item) => (
+        {iconsList.map((item, i) => (
           <div
+            key={`icon_${i}`}
             className="icon-div"
             style={{
               backgroundColor: item.selected ? "#e7e8e3" : null,

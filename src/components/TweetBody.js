@@ -4,8 +4,7 @@ import { FaPhoneAlt, FaEnvelope, FaPaperclip } from "react-icons/fa";
 import "../styles/TweetBody.css";
 
 const TweetBody = (props) => {
-  const { selectedTweet } = props;
-  console.log(selectedTweet);
+  const { selectedTweet, conversationList } = props;
   if (selectedTweet)
     return (
       <div className="tweet-body">
@@ -28,7 +27,43 @@ const TweetBody = (props) => {
             {/* <span className="user-name">Ea Tepene</span>
             <span className="user-name">Ea Tepene</span> */}
           </div>
-          <div className="conversation-div"></div>
+
+          <div className="conversation-div">
+            {conversationList.map((msg, i) => (
+              <div className="message-div">
+                <div className="image-div">
+                  <img
+                    className="msg-img"
+                    src={
+                      msg.message_create.sender_id === selectedTweet.user.id_str
+                        ? selectedTweet.user.profile_image_url
+                        : "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+                    }
+                    alt="user-profile-img"
+                  />
+                  <span
+                  className="message"
+                    style={{
+                      color:
+                        msg.message_create.sender_id ===
+                        selectedTweet.user.id_str
+                          ? "#585858"
+                          : "blue",
+                    }}
+                  >
+                    {msg.message_create.message_data.text}
+                  </span>
+                </div>
+                {/* <div className="message">
+                </div> */}
+                <div className="time">
+                  <span> {new Date(msg.created_timestamp * 1000).toLocaleTimeString().substring(0, 5)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/**  */}
           <div className="reply-div">
             <img
               className="profile-img"
@@ -55,12 +90,14 @@ const TweetBody = (props) => {
           <img
             className="customer-img"
             src={
-              "http://pbs.twimg.com/profile_images/1268287767966072834/HdqRqVJR_normal.jpg"
+              selectedTweet &&
+                selectedTweet.user &&
+                selectedTweet.user.profile_image_url
             }
             alt="user-profile-img"
           />
-          <span>{"Ea Tepene"}</span>
-          <span>{"Online"}</span>
+          <span className="customer-name">{"Ea Tepene"}</span>
+          <span className="online-txt">{"Online"}</span>
           <div className="contact-customer">
             <div className="contact-cell">
               <FaPhoneAlt />

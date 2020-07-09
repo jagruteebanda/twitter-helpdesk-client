@@ -18,14 +18,29 @@ class AgentScreen extends React.Component {
     const socket = socketIOClient(endpoint);
     this.state = {
       tweetList: [],
-      userName: "",
+      userId: "",
       socket,
-      selectedTweet: {}
+      selectedTweet: {},
+      conversationList: [],
     };
     // this.handleTweetSelect = this.handleTweetSelect.bind(this);
   }
 
+  clubTweets = (tweetList) => {
+    tweetList.reduce();
+  };
+
   componentDidMount = () => {
+    // let userId = localStorage.getItem('userId');
+    // this.setState({ userId });
+
+    let { socket, tweetList } = this.state;
+
+    socket.on("tweet", (data) => {
+      console.log(data.tweet);
+      tweetList.unshift(data.tweet);
+      this.setState({ tweetList });
+    });
 
     axios({
       method: "get",
@@ -36,8 +51,11 @@ class AgentScreen extends React.Component {
         if (res.data.code === 406) {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
-          res.data.data[0]['isSelected'] = true;
-          this.setState({ tweetList: res.data.data, selectedTweet: res.data.data[0] });
+          res.data.data[0]["isSelected"] = true;
+          this.setState({
+            tweetList: res.data.data,
+            selectedTweet: res.data.data[0],
+          });
         } else {
           console.log("login error:: ", res.data);
         }
@@ -45,12 +63,6 @@ class AgentScreen extends React.Component {
       .catch((err) => {
         console.log("Error in fetching tweets:: ", err);
       });
-
-    let { socket, tweetList } = this.state;
-    socket.on("tweet", (data) => {
-      tweetList.push(data.tweet);
-      this.setState({ tweetList });
-    });
   };
 
   handleTweetSelect(tweet) {
@@ -60,11 +72,34 @@ class AgentScreen extends React.Component {
       return t;
     });
     this.setState({ tweetList, selectedTweet: tweet });
-  };
+
+    const options = {
+      method: "GET",
+      url: "http://localhost:3000/apis/message/list",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+    };
+    axios(options)
+      .then((res) => {
+        // console.log(res);
+        this.setState({ conversationList: res.data.data });
+      })
+      .catch((err) => {
+        console.log("Error in fetching conversation:: ", err);
+      });
+  }
 
   render() {
-    const { tweetList, selectedTweet } = this.state;
-    console.log(selectedTweet);
+    const { tweetList, selectedTweet, conversationList } = this.state;
+    let userConversation = conversationList
+      .filter(
+        (c) =>
+          c.message_create.sender_id === selectedTweet.user.id_str ||
+          c.message_create.target.recipient_id === selectedTweet.user.id_str
+      )
+      .reverse();
     return (
       <div className="agent-screen">
         <SideBar />
@@ -72,8 +107,14 @@ class AgentScreen extends React.Component {
           <TopBar />
           <MidBar />
           <div className="main-body">
-            <TweetList tweetList={tweetList} handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)} />
-            <TweetBody selectedTweet={selectedTweet} />
+            <TweetList
+              tweetList={tweetList}
+              handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)}
+            />
+            <TweetBody
+              selectedTweet={selectedTweet}
+              conversationList={userConversation}
+            />
           </div>
         </div>
       </div>
