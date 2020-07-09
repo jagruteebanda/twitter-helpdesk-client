@@ -1,5 +1,4 @@
 import React from "react";
-import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import axios from "axios";
 import socketIOClient from "socket.io-client";
 
@@ -7,6 +6,7 @@ import SideBar from "../components/SideBar";
 import TopBar from "../components/TopBar";
 import MidBar from "../components/MidBar";
 import TweetList from "../components/TweetList";
+import TweetBody from "../components/TweetBody";
 import conf from "../conf/config";
 
 import "../styles/AgentScreen.css";
@@ -37,7 +37,7 @@ class AgentScreen extends React.Component {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
           res.data.data[0]['isSelected'] = true;
-          this.setState({ tweetList: res.data.data });
+          this.setState({ tweetList: res.data.data, selectedTweet: res.data.data[0] });
         } else {
           console.log("login error:: ", res.data);
         }
@@ -59,10 +59,12 @@ class AgentScreen extends React.Component {
       t.id === tweet.id ? (t["isSelected"] = true) : (t["isSelected"] = false);
       return t;
     });
-    this.setState({ tweetList });
+    this.setState({ tweetList, selectedTweet: tweet });
   };
 
   render() {
+    const { tweetList, selectedTweet } = this.state;
+    console.log(selectedTweet);
     return (
       <div className="agent-screen">
         <SideBar />
@@ -70,46 +72,8 @@ class AgentScreen extends React.Component {
           <TopBar />
           <MidBar />
           <div className="main-body">
-            <TweetList tweetList={this.state.tweetList} handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)} />
-            <div className="tweet-body">
-              <div className="tweet-conversation">
-                <div className="user-data">
-                  <img
-                    className="tweet-profile-img"
-                    src={
-                      "http://pbs.twimg.com/profile_images/1268287767966072834/HdqRqVJR_normal.jpg"
-                    }
-                    width="30"
-                    height="30"
-                    alt="user-profile-img"
-                  />
-                  <span className="user-name">Ea Tepene</span>
-                  <span className="user-name">Ea Tepene</span>
-                  <span className="user-name">Ea Tepene</span>
-                </div>
-              </div>
-              <div className="tweet-customer">
-                <img
-                  className="customer-img"
-                  src={
-                    "http://pbs.twimg.com/profile_images/1268287767966072834/HdqRqVJR_normal.jpg"
-                  }
-                  alt="user-profile-img"
-                />
-                <span>{"Ea Tepene"}</span>
-                <span>{"Online"}</span>
-                <div className="contact-customer">
-                  <div className="contact-cell">
-                    <FaPhoneAlt />
-                    <span className="contact-cell-content">{"Call"}</span>
-                  </div>
-                  <div className="contact-cell">
-                    <FaEnvelope />
-                    <span className="contact-cell-content">{"Email"}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <TweetList tweetList={tweetList} handleTweetSelect={(tweet) => this.handleTweetSelect(tweet)} />
+            <TweetBody selectedTweet={selectedTweet} />
           </div>
         </div>
       </div>
