@@ -7,8 +7,8 @@ class LoginAndRegister extends React.Component {
     super(props);
     this.state = {
       loginDetails: {
-        username: "jagz",
-        password: "jagz@123",
+        username: "",
+        password: "",
       },
       registerDetails: {
         username: "",
