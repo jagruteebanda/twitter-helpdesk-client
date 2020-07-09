@@ -1,4 +1,5 @@
 import React from "react";
+import { IconContext } from "react-icons";
 import { FaPhoneAlt, FaEnvelope, FaPaperclip } from "react-icons/fa";
 
 import "../styles/TweetBody.css";
@@ -30,7 +31,7 @@ const TweetBody = (props) => {
 
           <div className="conversation-div">
             {conversationList.map((msg, i) => (
-              <div className="message-div">
+              <div key={`message_${msg.id}`} className="message-div">
                 <div className="image-div">
                   <img
                     className="msg-img"
@@ -42,7 +43,7 @@ const TweetBody = (props) => {
                     alt="user-profile-img"
                   />
                   <span
-                  className="message"
+                    className="message"
                     style={{
                       color:
                         msg.message_create.sender_id ===
@@ -57,7 +58,12 @@ const TweetBody = (props) => {
                 {/* <div className="message">
                 </div> */}
                 <div className="time">
-                  <span> {new Date(msg.created_timestamp * 1000).toLocaleTimeString().substring(0, 5)}</span>
+                  <span>
+                    {" "}
+                    {new Date(msg.created_timestamp * 1000)
+                      .toLocaleTimeString()
+                      .substring(0, 5)}
+                  </span>
                 </div>
               </div>
             ))}
@@ -68,7 +74,7 @@ const TweetBody = (props) => {
             <img
               className="profile-img"
               src={
-                "http://pbs.twimg.com/profile_images/1268287767966072834/HdqRqVJR_normal.jpg"
+                "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
               }
               width="30"
               height="30"
@@ -91,20 +97,34 @@ const TweetBody = (props) => {
             className="customer-img"
             src={
               selectedTweet &&
-                selectedTweet.user &&
-                selectedTweet.user.profile_image_url
+              selectedTweet.user &&
+              selectedTweet.user.profile_image_url
             }
             alt="user-profile-img"
           />
-          <span className="customer-name">{"Ea Tepene"}</span>
+          <span className="customer-name">{selectedTweet.user && selectedTweet.user.name}</span>
           <span className="online-txt">{"Online"}</span>
           <div className="contact-customer">
             <div className="contact-cell">
-              <FaPhoneAlt />
+              <IconContext.Provider
+                value={{
+                  color: "#121212",
+                  size: "0.7rem",
+                }}
+              >
+                <FaPhoneAlt className="contact-icon" />
+              </IconContext.Provider>
               <span className="contact-cell-content">{"Call"}</span>
             </div>
             <div className="contact-cell">
-              <FaEnvelope />
+              <IconContext.Provider
+                value={{
+                  color: "#121212",
+                  size: "0.7rem",
+                }}
+              >
+                <FaEnvelope className="contact-icon" />
+              </IconContext.Provider>
               <span className="contact-cell-content">{"Email"}</span>
             </div>
           </div>

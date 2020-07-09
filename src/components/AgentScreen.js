@@ -63,15 +63,6 @@ class AgentScreen extends React.Component {
       .catch((err) => {
         console.log("Error in fetching tweets:: ", err);
       });
-  };
-
-  handleTweetSelect(tweet) {
-    let { tweetList } = this.state;
-    tweetList = tweetList.map((t) => {
-      t.id === tweet.id ? (t["isSelected"] = true) : (t["isSelected"] = false);
-      return t;
-    });
-    this.setState({ tweetList, selectedTweet: tweet });
 
     const options = {
       method: "GET",
@@ -84,11 +75,20 @@ class AgentScreen extends React.Component {
     axios(options)
       .then((res) => {
         // console.log(res);
-        this.setState({ conversationList: res.data.data });
+        this.setState({ conversationList: res.data.data.events });
       })
       .catch((err) => {
         console.log("Error in fetching conversation:: ", err);
       });
+  };
+
+  handleTweetSelect(tweet) {
+    let { tweetList } = this.state;
+    tweetList = tweetList.map((t) => {
+      t.id === tweet.id ? (t["isSelected"] = true) : (t["isSelected"] = false);
+      return t;
+    });
+    this.setState({ tweetList, selectedTweet: tweet });
   }
 
   render() {

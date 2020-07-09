@@ -23,3 +23,27 @@
   flex-direction: row;
 }
 
+
+
+/**
+* CUSTOM SCROLLBAR CSS
+*/
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e6e6e6; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e6e6e6; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #e6e6e6; 
+}
