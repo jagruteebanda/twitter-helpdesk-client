@@ -32,7 +32,7 @@ class LoginAndRegister extends React.Component {
       data: loginDetails,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.code === 406) {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
@@ -60,7 +60,7 @@ class LoginAndRegister extends React.Component {
       data: registerDetails,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.code === 406) {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
