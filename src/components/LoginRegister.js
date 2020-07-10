@@ -68,7 +68,7 @@ class LoginAndRegister extends React.Component {
           // this.props.history.push("/home");
           alert('Please login to use to application!');
         } else {
-          console.log("login error:: ", res.data);
+          // console.log("login error:: ", res.data);
         }
       })
       .catch((err) => {
