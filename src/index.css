@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-style: normal;
+  font-weight: normal;
+  src: local('SourceSansPro-Regular'),
+       /* url('./fonts/Source_Sans_Pro/SourceSansPro-Light.ttf') format('truetype') */
+       url('./fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf') format('truetype')
+       /* url('./fonts/Source_Sans_Pro/SourceSansPro-SemiBold.ttf') format('truetype') */
+       /* url('./fonts/Source_Sans_Pro/SourceSansPro-Italic.ttf') format('truetype') */
+       /* url('./fonts/Source_Sans_Pro/SourceSansPro-Light.ttf') format('truetype') */
+}
+
+body {
+  font-family: 'SourceSansPro';
+}
+
+input {
+  font-family: 'SourceSansPro';
+}

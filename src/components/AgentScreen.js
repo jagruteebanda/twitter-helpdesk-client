@@ -45,7 +45,7 @@ class AgentScreen extends React.Component {
 
     axios({
       method: "get",
-      url: "http://127.0.0.1:3000/apis/tweets/get",
+      url: `${conf.base_url}/apis/tweets/get`,
     })
       .then((res) => {
         // console.log(res);
@@ -67,7 +67,7 @@ class AgentScreen extends React.Component {
 
     axios({
       method: "GET",
-      url: "http://localhost:3000/apis/message/list",
+      url: `${conf.base_url}/apis/message/list`,
       headers: {
         accept: "application/json",
         "content-type": "application/json",
@@ -101,7 +101,7 @@ class AgentScreen extends React.Component {
     // console.log(user, message);
     axios({
       method: "POST",
-      url: "http://localhost:3000/apis/message/send",
+      url: `${conf.base_url}/apis/message/send`,
       headers: {
         accept: "application/json",
         "content-type": "application/json",
@@ -120,7 +120,7 @@ class AgentScreen extends React.Component {
     })
       .then((res) => {
         let { conversationList } = this.state;
-        conversationList.unshift(res.data.data.event); 
+        conversationList.unshift(res.data.data.event);
         this.setState({ conversationList });
       })
       .catch((err) => {
@@ -130,13 +130,18 @@ class AgentScreen extends React.Component {
 
   render() {
     const { tweetList, selectedTweet, conversationList, message } = this.state;
-    let userConversation = conversationList
-      .filter(
-        (c) =>
-          c.message_create.sender_id === selectedTweet.user.id_str ||
-          c.message_create.target.recipient_id === selectedTweet.user.id_str
-      )
-      .reverse();
+    let userConversation =
+      selectedTweet &&
+      selectedTweet.user &&
+      conversationList &&
+      conversationList.length > 0 &&
+      conversationList
+        .filter(
+          (c) =>
+            c.message_create.sender_id === selectedTweet.user.id_str ||
+            c.message_create.target.recipient_id === selectedTweet.user.id_str
+        )
+        .reverse();
     return (
       <div className="agent-screen">
         <SideBar />

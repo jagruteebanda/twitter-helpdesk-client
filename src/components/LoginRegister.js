@@ -3,6 +3,8 @@ import axios from "axios";
 
 import "../styles/LoginAndRegister.css";
 
+import conf from "../conf/config";
+
 class LoginAndRegister extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ class LoginAndRegister extends React.Component {
     const { loginDetails } = this.state;
     axios({
       method: "post",
-      url: "http://127.0.0.1:3000/apis/user/login",
+      url: `${conf.base_url}/apis/user/login`,
       headers: {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -36,7 +38,7 @@ class LoginAndRegister extends React.Component {
         } else if (res.data.code === 200) {
           localStorage.setItem("userName", loginDetails.username);
           localStorage.setItem("userId", "1280422772561244160");
-          window.location = "http://localhost:3000/twitter/login";
+          window.location = `${conf.base_url}/twitter/login`;
         } else {
           console.log("login error:: ", res.data);
         }
@@ -50,7 +52,7 @@ class LoginAndRegister extends React.Component {
     const { registerDetails } = this.state;
     axios({
       method: "post",
-      url: "http://127.0.0.1:3000/apis/user/register",
+      url: `${conf.base_url}/apis/user/register`,
       headers: {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -62,8 +64,9 @@ class LoginAndRegister extends React.Component {
         if (res.data.code === 406) {
           console.log("login error", res.error);
         } else if (res.data.code === 200) {
-          localStorage.setItem("userName", registerDetails.username);
-          this.props.history.push("/home");
+          // localStorage.setItem("userName", registerDetails.username);
+          // this.props.history.push("/home");
+          alert('Please login to use to application!');
         } else {
           console.log("login error:: ", res.data);
         }
@@ -119,6 +122,7 @@ class LoginAndRegister extends React.Component {
             <div className="input-group">
               <input
                 className="input-field"
+                type="password"
                 value={loginDetails.password}
                 placeholder={"Password"}
                 password="true"
@@ -154,6 +158,7 @@ class LoginAndRegister extends React.Component {
             <div className="input-group">
               <input
                 className="input-field"
+                type="password"
                 value={registerDetails.password}
                 placeholder={"Password"}
                 password="true"

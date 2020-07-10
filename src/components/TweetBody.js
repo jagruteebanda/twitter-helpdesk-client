@@ -40,43 +40,46 @@ const TweetBody = ({
           </div>
 
           <div className="conversation-div">
-            {conversationList.map((msg, i) => (
-              <div key={`message_${msg.id}`} className="message-div">
-                <div className="image-div">
-                  <img
-                    className="msg-img"
-                    src={
-                      msg.message_create.sender_id === selectedTweet.user.id_str
-                        ? selectedTweet.user.profile_image_url
-                        : "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
-                    }
-                    alt="user-profile-img"
-                  />
-                  <span
-                    className="message"
-                    style={{
-                      color:
+            {conversationList &&
+              conversationList.length > 0 &&
+              conversationList.map((msg, i) => (
+                <div key={`message_${msg.id}`} className="message-div">
+                  <div className="image-div">
+                    <img
+                      className="msg-img"
+                      src={
                         msg.message_create.sender_id ===
                         selectedTweet.user.id_str
-                          ? "#585858"
-                          : "blue",
-                    }}
-                  >
-                    {msg.message_create.message_data.text}
-                  </span>
-                </div>
-                {/* <div className="message">
+                          ? selectedTweet.user.profile_image_url
+                          : "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+                      }
+                      alt="user-profile-img"
+                    />
+                    <span
+                      className="message"
+                      style={{
+                        color:
+                          msg.message_create.sender_id ===
+                          selectedTweet.user.id_str
+                            ? "#585858"
+                            : "blue",
+                      }}
+                    >
+                      {msg.message_create.message_data.text}
+                    </span>
+                  </div>
+                  {/* <div className="message">
                 </div> */}
-                <div className="time">
-                  <span>
-                    {" "}
-                    {new Date(msg.created_timestamp * 1000)
-                      .toLocaleTimeString()
-                      .substring(0, 5)}
-                  </span>
+                  <div className="time">
+                    <span>
+                      {" "}
+                      {new Date(msg.created_timestamp * 1000)
+                        .toLocaleTimeString()
+                        .substring(0, 5)}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           {/**  */}
@@ -99,10 +102,24 @@ const TweetBody = ({
               />
               {message.length > 0 ? (
                 <div onClick={(e) => sendMessage(selectedTweet.user, message)}>
-                  <FaRegPaperPlane />
+                  <IconContext.Provider
+                    value={{
+                      color: "#979797",
+                      size: "0.9em",
+                    }}
+                  >
+                    <FaRegPaperPlane />
+                  </IconContext.Provider>
                 </div>
               ) : (
-                <FaPaperclip />
+                <IconContext.Provider
+                  value={{
+                    color: "#979797",
+                    size: "0.9em",
+                  }}
+                >
+                  <FaPaperclip />
+                </IconContext.Provider>
               )}
             </div>
           </div>

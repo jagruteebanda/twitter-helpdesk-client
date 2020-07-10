@@ -1,5 +1,6 @@
 import React from "react";
-import { FaSearch, FaSlidersH } from "react-icons/fa";
+import { IconContext } from 'react-icons';
+import { FaSearch, FaSlidersH, FaCircle, FaCaretDown } from "react-icons/fa";
 import "../styles/MidBar.css";
 
 const MidBar = () => {
@@ -19,7 +20,23 @@ const MidBar = () => {
         </div>
       </div>
       <div className="online">
+        <IconContext.Provider
+          value={{
+            color: "#68c24f",
+            size: "0.5em"
+          }}
+        >
+          <FaCircle />
+        </IconContext.Provider>
         <span className="online-text">Online</span>
+        <IconContext.Provider
+          value={{
+            color: "#797979",
+            size: "0.9em"
+          }}
+        >
+          <FaCaretDown />
+        </IconContext.Provider>
       </div>
     </div>
   );
