@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 // import Home from '../src/containers/Home';
 import LoginAndRegister from './components/LoginRegister';
+import TwitterAuth from './components/TwitterAuth';
 import AgentScreen from './components/AgentScreen';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         {/* <Route exact path="/" component={Home} /> */}
         <Route exact path="/" component={LoginAndRegister} />
+        <Route exact path="/twitter-auth" component={TwitterAuth} />
         <Route exact path="/home" component={AgentScreen} />
         <Redirect to="/" />
       </Switch>

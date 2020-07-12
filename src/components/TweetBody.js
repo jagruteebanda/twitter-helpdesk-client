@@ -43,9 +43,16 @@ const TweetBody = ({
             {conversationList &&
               conversationList.length > 0 &&
               conversationList.map((msg, i) => (
-                <div key={`message_${msg.id}`} className="message-div">
-                  <div className="image-div">
-                    <img
+                <div key={`message_${msg.id}`} className={"message-div"}>
+                  <div
+                  key={`message_${msg.id}`}
+                    className={
+                      msg.message_create.sender_id === selectedTweet.user.id_str
+                        ? "image-div-left"
+                        : "image-div-right"
+                    }
+                  >
+                    {/* <img
                       className="msg-img"
                       src={
                         msg.message_create.sender_id ===
@@ -54,29 +61,26 @@ const TweetBody = ({
                           : "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
                       }
                       alt="user-profile-img"
-                    />
+                    /> */}
                     <span
-                      className="message"
-                      style={{
-                        color:
-                          msg.message_create.sender_id ===
-                          selectedTweet.user.id_str
-                            ? "#585858"
-                            : "blue",
-                      }}
+                      className={"message"}
+                      // style={{
+                      //   color:
+                      //     msg.message_create.sender_id ===
+                      //     selectedTweet.user.id_str
+                      //       ? "#585858"
+                      //       : "blue",
+                      // }}
                     >
                       {msg.message_create.message_data.text}
                     </span>
-                  </div>
-                  {/* <div className="message">
-                </div> */}
-                  <div className="time">
-                    <span>
-                      {" "}
-                      {new Date(msg.created_timestamp * 1000)
-                        .toLocaleTimeString()
-                        .substring(0, 5)}
-                    </span>
+                    {/* <div className="time"> */}
+                      <span className="time">
+                        {new Date(msg.created_timestamp * 1000)
+                          .toLocaleTimeString()
+                          .substring(0, 5)}
+                      </span>
+                    {/* </div> */}
                   </div>
                 </div>
               ))}
