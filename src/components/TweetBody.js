@@ -35,8 +35,6 @@ const TweetBody = ({
             <span className="user-name">
               {selectedTweet.user && selectedTweet.user.name}
             </span>
-            {/* <span className="user-name">Ea Tepene</span>
-            <span className="user-name">Ea Tepene</span> */}
           </div>
 
           <div className="conversation-div">
@@ -52,35 +50,16 @@ const TweetBody = ({
                         : "image-div-right"
                     }
                   >
-                    {/* <img
-                      className="msg-img"
-                      src={
-                        msg.message_create.sender_id ===
-                        selectedTweet.user.id_str
-                          ? selectedTweet.user.profile_image_url
-                          : "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
-                      }
-                      alt="user-profile-img"
-                    /> */}
                     <span
                       className={"message"}
-                      // style={{
-                      //   color:
-                      //     msg.message_create.sender_id ===
-                      //     selectedTweet.user.id_str
-                      //       ? "#585858"
-                      //       : "blue",
-                      // }}
                     >
                       {msg.message_create.message_data.text}
                     </span>
-                    {/* <div className="time"> */}
                       <span className="time">
                         {new Date(msg.created_timestamp * 1000)
                           .toLocaleTimeString()
                           .substring(0, 5)}
                       </span>
-                    {/* </div> */}
                   </div>
                 </div>
               ))}

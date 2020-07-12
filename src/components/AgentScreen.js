@@ -34,20 +34,14 @@ class AgentScreen extends React.Component {
 
   componentDidMount = () => {
     socket.on("tweet", (data) => {
-      // console.log(data.tweet);
       let { tweetList } = this.state;
       tweetList.unshift(...data.tweet);
       this.setState({ tweetList });
     });
 
     socket.on("message", (data) => {
-      // console.log(data.message);
-
       let { conversationList } = this.state;
-      // console.log(conversationList);
-      // conversationList = [...data.message, ...conversationList];
       conversationList.unshift(...data.message);
-      // console.log(conversationList);
       this.setState({ conversationList });
     });
 
@@ -138,7 +132,6 @@ class AgentScreen extends React.Component {
   }
 
   sendMessage(user, message) {
-    // console.log(user, message);
     axios({
       method: "POST",
       url: `${conf.base_url}/apis/message/send`,

@@ -21,13 +21,11 @@
   flex-direction: row;
   align-items: center;
   height: 3vh;
-  /* justify-content: center; */
   border-bottom: 1px solid #f4f4f4;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 40px;
   padding-right: 40px;
-  /* background-color: aqua; */
 }
 
 .profile-img {
@@ -55,31 +53,17 @@
 }
 
 .message-div {
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
-  /* width: 100%; */
-  /* height: auto; */
   margin-top: 5px;
-  /* margin-bottom: 5px; */
-  /* background-color: yellow; */
-  /* padding: 10px; */
-  /* border-radius: 5px; */
 }
 
 .image-div-left,
 .image-div-right {
-  /* width: 10%; */
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: flex-start; */
   width: fit-content;
   height: 30px;
   background-color: #fff;
-  /* padding: 10px; */
-  /* margin-top: 5px; */
   border-radius: 5px;
 }
 
@@ -100,11 +84,9 @@
   text-align: center;
   margin-left: 10px;
   font-size: 0.8rem;
-  /* background-color: #154706; */
 }
 
 .time {
-  /* width: 10%; */
   font-size: 0.8rem;
   color: #979797;
   margin-left: 10px;
@@ -124,7 +106,6 @@
   padding-bottom: 10px;
   margin-left: 40px;
   margin-right: 40px;
-  /* background-color: aquamarine; */
 }
 
 .reply-input-group {
